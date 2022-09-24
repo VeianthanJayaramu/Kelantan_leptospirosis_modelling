@@ -1,7 +1,7 @@
-#=========================================== MODEL DEVELOPMENT ===============================================
+#============================== RANDOM FOREST MODEL DEVELOPMENT ================================
 # set working directory
 
-# call libraries
+# call required libraries
 library(randomForest)
 library(caret)
 library(doParallel)
@@ -17,14 +17,12 @@ seed <- 1
 set.seed(seed)
 inTrain <- createDataPartition(y = mydata$Cases, p = 0.8, list = FALSE)
 
-# split into training and testing sets - view the distribution
+# split into training and testing sets
 training <- mydata[inTrain, ]
 testing <- mydata[-inTrain, ]
 
-# Develop a model using bagging ensemble technique - Random Forest ---------------------------------------------
-
 # customize random forest
-#****************************************************************************************
+#***********************************************************************************************
 customRF <- list(type = "Classification", library = "randomForest", loop = NULL)
 customRF$parameters <- data.frame(parameter = c("mtry", "ntree", "nodesize"),
                                   class = rep("numeric", 3),
@@ -38,7 +36,7 @@ customRF$predict <- function(modelFit, newdata, preProc = NULL, submodels = NULL
 customRF$prob <- function(modelFit, newdata, preProc = NULL, submodels = NULL)
   predict(modelFit, newdata, type = "prob")
 customRF$sort <- function(x) x[order(x[,1]), ]
-#*****************************************************************************************
+#***********************************************************************************************
 
 # control model training
 set.seed(seed)
@@ -50,7 +48,7 @@ control <- trainControl(method = "repeatedcv",
                         index = ind,
                         allowParallel = FALSE)
 
-# create different combinations of tuning parameters
+# create all combinations of tuning parameters
 tunegrid <- expand.grid(.mtry = seq(from = 1, to = 10, by = 1), # number of predictors
                         .ntree = seq(from = 200, to = 700, by = 25), # number of trees
                         .nodesize = seq(from = 1, to = 10, by = 1)) # number of terminal node
@@ -72,7 +70,7 @@ model.rf <- train(Cases~.,
                   tuneGrid = tunegrid,
                   trControl = control)
 
-# record training stop time and calculate model run time
+# record training stop time, and compute model run time
 stop.time <- proc.time()
 run.time <- stop.time - start.time; print(run.time)
 
@@ -84,9 +82,10 @@ pred <- model.rf$finalModel$predicted
 obs <- training$Cases
 confusionMatrix(pred, obs, positive = 'High')
 
-# predict testing set output using developed 
+# predict testing set output with the trained model
 set.seed(seed)
 prediction <- predict(model.rf, testing)
 
 # calculate testing accuracy
 confusionMatrix(prediction, testing$Cases, positive = 'High')
+#============================================== THE END =========================================
