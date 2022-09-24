@@ -21,6 +21,6 @@ Instruction to train and test models:
 Reminder!
 
 - model running time depends on the computer and model parameters.
-- try with a single combination of tunegrid and k value for a quick model run.
+- try with a single combination of tunegrid and a smaller k-fold value for a quick model run.
 
 The end :)
