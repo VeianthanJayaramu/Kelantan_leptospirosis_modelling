@@ -4,7 +4,7 @@ Optimized inputs of Kelantan leptospirosis models and R code to train and test t
 
 Introduction:
 
-The uploaded data reflect the final inputs (hydrometeorological indices) that were optimized using a relative importance measure called mean decrease Gini (Gini) and a script of R code to perform random forest modelling and prediction of leptospirosis occurrence. These data were prepared under a project called 'Understanding and Managing the Risk of Water-Related Diseases under Hydrometeorological Extremes' funded by the UK (NERC) and Malaysia (Ministry of Higher Education). The study of the uploaded data investigated the hydrometeorological indices and their sets in correlating with and classifying the temporal distribution of three Kelantan flood prone districts' leptospirosis occurrence. For more information, please refer to https://strideproject518448821.wordpress.com/
+The uploaded data reflect the final inputs (hydrometeorological indices) that were optimized using a relative importance measure called mean decrease Gini (MDG) and a script of R code to perform random forest modelling and prediction of leptospirosis occurrence. These data were prepared under a project called 'Understanding and Managing the Risk of Water-Related Diseases under Hydrometeorological Extremes' funded by the UK (NERC) and Malaysia (Ministry of Higher Education). The study of the uploaded data investigated the hydrometeorological indices and their sets in correlating with and classifying the temporal distribution of three Kelantan flood prone districts' leptospirosis occurrence. For more information, please refer to https://strideproject518448821.wordpress.com/
 
 Description about the files:
 
